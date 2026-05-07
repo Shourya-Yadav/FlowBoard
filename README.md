@@ -80,7 +80,7 @@ Make sure you have the following installed:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/flowboard.git
+git clone https://github.com/Shourya-Yadav/flowboard.git
 cd flowboard
 
 # 2. Install backend dependencies
@@ -156,8 +156,8 @@ The application is live and deployed on Railway:
 B.Tech in Computer Science & Engineering (AI/ML Specialization)
 Ajay Kumar Garg Engineering College, 2022–2026
 
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat-square&logo=github&logoColor=white)](https://github.com/your-username)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/your-profile)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat-square&logo=github&logoColor=white)](https://github.com/Shourya-Yadav)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shouryayadav2/)
 
 ---
 
