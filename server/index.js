@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
 
 const connectDB = require('./config/db');
 
@@ -16,7 +17,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || '*',
+    origin: '*',
     credentials: true,
   })
 );
@@ -26,14 +27,6 @@ app.use(
 ========================================================= */
 
 app.use(express.json());
-
-/* =========================================================
-   TEST ROUTE
-========================================================= */
-
-app.get('/', (req, res) => {
-  res.send('FlowBoard Backend Running 🚀');
-});
 
 /* =========================================================
    API ROUTES
@@ -46,16 +39,32 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/dashboard', require('./routes/dashboard'));
 
 /* =========================================================
-   ERROR HANDLER
+   TEST API
 ========================================================= */
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-
-  res.status(500).json({
-    message: 'Internal server error',
-    error: err.message,
+app.get('/api/test', (req, res) => {
+  res.json({
+    message: 'FlowBoard Backend Running 🚀',
   });
+});
+
+/* =========================================================
+   FRONTEND STATIC FILES
+========================================================= */
+
+app.use(
+  express.static(
+    path.join(__dirname, '../client/dist')
+  )
+);
+
+app.get('*', (req, res) => {
+  res.sendFile(
+    path.join(
+      __dirname,
+      '../client/dist/index.html'
+    )
+  );
 });
 
 /* =========================================================
