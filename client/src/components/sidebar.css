@@ -1,0 +1,384 @@
+/* ============================================================
+   SIDEBAR — Premium Dark SaaS
+   FlowBoard · sidebar.css
+   ============================================================ */
+
+/* ── Shell ─────────────────────────────────────────────────── */
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  /* Glassmorphism base */
+  background: linear-gradient(
+    160deg,
+    rgba(17, 17, 24, 0.97) 0%,
+    rgba(13, 13, 20, 0.99) 100%
+  );
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+
+  /* Ambient glow on the right edge */
+  box-shadow:
+    1px 0 0 rgba(108, 99, 255, 0.08),
+    4px 0 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Subtle noise texture overlay */
+.sidebar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+.sidebar > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Logo ───────────────────────────────────────────────────── */
+.sidebar-logo {
+  padding: 22px 20px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.logo-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 17px;
+  color: #fff;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+
+  /* Gradient background */
+  background: linear-gradient(135deg, var(--accent) 0%, #a78bfa 100%);
+  box-shadow:
+    0 4px 16px rgba(108, 99, 255, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.logo-mark::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+  border-radius: inherit;
+}
+
+.sidebar-logo:hover .logo-mark {
+  transform: rotate(-6deg) scale(1.08);
+  box-shadow:
+    0 6px 24px rgba(108, 99, 255, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.logo-text {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+.logo-tag {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+/* ── Nav Shell ──────────────────────────────────────────────── */
+.sidebar-nav {
+  flex: 1;
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+}
+
+/* ── Section Labels ─────────────────────────────────────────── */
+.nav-section-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  padding: 14px 10px 6px;
+  opacity: 0.7;
+}
+
+.nav-section-label--admin {
+  margin-top: 6px;
+}
+
+/* ── Nav Spacer ─────────────────────────────────────────────── */
+.nav-spacer {
+  flex: 1;
+  min-height: 12px;
+}
+
+/* ── Nav Links ──────────────────────────────────────────────── */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  font-family: var(--font);
+  position: relative;
+  overflow: hidden;
+
+  transition:
+    color 0.18s ease,
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+/* Shimmer layer */
+.nav-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+}
+
+.nav-link:hover::before {
+  transform: translateX(100%);
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  transform: translateX(2px);
+}
+
+/* Active state — glowing left border + dim accent fill */
+.nav-link.active {
+  background: linear-gradient(
+    90deg,
+    rgba(108, 99, 255, 0.18) 0%,
+    rgba(108, 99, 255, 0.06) 100%
+  );
+  color: #c4bfff;
+  font-weight: 600;
+  transform: translateX(0);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.nav-link.active .nav-icon {
+  color: var(--accent);
+  filter: drop-shadow(0 0 6px rgba(108, 99, 255, 0.7));
+}
+
+/* Icon */
+.nav-icon {
+  font-size: 17px;
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  line-height: 1;
+}
+
+.nav-link:hover .nav-icon {
+  transform: scale(1.15);
+}
+
+/* Badge (notification dot) */
+.nav-badge {
+  margin-left: auto;
+  background: var(--red);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 18px;
+  text-align: center;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 8px rgba(255, 95, 126, 0.5);
+  animation: badgePulse 2.4s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% { box-shadow: 0 2px 8px rgba(255, 95, 126, 0.5); }
+  50%       { box-shadow: 0 2px 14px rgba(255, 95, 126, 0.85); }
+}
+
+/* Logout — subtle red tint on hover */
+.nav-link--logout {
+  margin-top: 4px;
+  color: var(--text-muted);
+}
+
+.nav-link--logout:hover {
+  background: rgba(255, 95, 126, 0.1);
+  color: var(--red);
+  transform: translateX(2px);
+}
+
+.nav-link--logout:hover .nav-icon {
+  transform: translateX(3px) scale(1.1);
+  filter: none;
+}
+
+/* ── Sidebar Divider ────────────────────────────────────────── */
+.sidebar-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.04);
+  margin: 6px 10px;
+  flex-shrink: 0;
+}
+
+/* ── User Block ─────────────────────────────────────────────── */
+.sidebar-user {
+  padding: 14px 14px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex-shrink: 0;
+
+  background: linear-gradient(
+    0deg,
+    rgba(108, 99, 255, 0.05) 0%,
+    transparent 100%
+  );
+  transition: background 0.2s ease;
+  cursor: default;
+}
+
+.sidebar-user:hover {
+  background: linear-gradient(
+    0deg,
+    rgba(108, 99, 255, 0.1) 0%,
+    rgba(108, 99, 255, 0.02) 100%
+  );
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+
+  /* Glowing ring */
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow:
+    0 0 0 2px rgba(108, 99, 255, 0.35),
+    0 2px 12px rgba(0, 0, 0, 0.4);
+
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.sidebar-user:hover .user-avatar {
+  box-shadow:
+    0 0 0 2px rgba(108, 99, 255, 0.7),
+    0 4px 16px rgba(108, 99, 255, 0.3);
+  transform: scale(1.06);
+}
+
+.user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.user-role {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  margin-top: 2px;
+}
+
+/* Online dot */
+.user-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(0, 212, 170, 0.7);
+  animation: statusPulse 3s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.7; transform: scale(0.85); }
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+/* ── Scrollbar inside sidebar ───────────────────────────────── */
+.sidebar::-webkit-scrollbar {
+  width: 3px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(108, 99, 255, 0.3);
+  border-radius: 2px;
+}
