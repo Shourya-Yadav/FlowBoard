@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const path = require('path');
 
 const connectDB = require('./config/db');
 
@@ -47,27 +46,6 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/dashboard', require('./routes/dashboard'));
 
 /* =========================================================
-   SERVE FRONTEND (OPTIONAL)
-========================================================= */
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(
-    express.static(
-      path.join(__dirname, '../client/dist')
-    )
-  );
-
-  app.get('*', (req, res) => {
-    res.sendFile(
-      path.join(
-        __dirname,
-        '../client/dist/index.html'
-      )
-    );
-  });
-}
-
-/* =========================================================
    ERROR HANDLER
 ========================================================= */
 
@@ -87,7 +65,5 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(
-    `🚀 Server running on port ${PORT}`
-  );
+  console.log(`🚀 Server running on port ${PORT}`);
 });
